@@ -1,4 +1,4 @@
-function [xf, yf, thetaf, dist, dist_angle, goal_angle] = ...
+function [xf,yf,thetaf,dist,dist_angle,goal_angle]=...
 DWanalysis(xi, yi, thetai, vi, wi, thetag, obstacles, delt, M)
 % Analysis of dynamic window.
 %**************************************************
@@ -53,27 +53,29 @@ DWanalysis(xi, yi, thetai, vi, wi, thetag, obstacles, delt, M)
       % Predicted y coordinate (m).
       yf = yi + (vi/wi)*(cos(thetai) - cos(thetai + wi*delt));
       % Predicted heading angle (rad).
-      thetaf = thetai + wi*delt;
+      thetaf = thetai + wi*  ;
   end
 
 % Normalise
-  thetaf = mod(thetaf, 2*pi); 
+  thetaf = mod(thetaf,2*pi);
 
 % Distance to nearest obstacle on the trajectory (m).
   dist = M;
   dist_angle = M;
-
   for i = 1:no
-      [dist_angle_temp, dist_temp] = onTraj(xi, yi ,thetai, vi, wi, obstacles(i, :), M);
+
+      [dist_angle_temp,dist_temp] = onTraj(xi,yi,thetai,vi,wi,obstacles(i,:),M);
+ 
       if dist_temp < dist
           dist = dist_temp;
           dist_angle = dist_angle_temp;
       end
+      
   end
 
 % Angle between target heading and predicted heading (m)
-  goal_angle = pi - (thetag - thetaf);
+  goal_angle = thetag - thetaf;
 % Normalise
-  goal_angle = mod(goal_angle, 2*pi);
+  goal_angle = mod(goal_angle,2*pi);
 
 % end

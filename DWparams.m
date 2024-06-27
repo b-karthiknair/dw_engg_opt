@@ -19,7 +19,9 @@ yi = 2.0;
 thetai = 0.25*pi;
 thetag = 0.4*pi;
 obstacles = [[1.2,4.1];[1.1,2.1];[2.9,6.1];[4.2,1.1]];
+
 delt = 0.25;
+t_interval = delt/10;
 M = 10;
 a = 2.0;
 b = 0.2;
