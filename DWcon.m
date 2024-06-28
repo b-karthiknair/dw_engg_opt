@@ -15,13 +15,11 @@ wi = x(2);
 % Constant parameter values
 DWparams;
 
-
-% Analysis of current valve spring design.
 [xf, yf, thetaf ,dist, dist_angle, goal_angle] = DWanalysis(xi ,yi ,thetai, vi, wi, thetag, obstacles, delt, M);
 
 % Scaled  constraints
 % safe translational velocity constraint
-g(1) = ((vi^2)/(2*(-a_lin_b(1))*dist))^0.5 - 1;
+g(1) = ((vi^2)/(2*(-a_lin_b(1))*dist))^0.5 - 1; % v^2 < 2*a*dist 
 % safe angular velocity constraint
 g(2) = ((wi^2)/(2*(-a_ang_b(1))*dist))^0.5 - 1;  
 

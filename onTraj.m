@@ -1,11 +1,12 @@
-function [dist_angle_temp,dist_temp] = onTraj(xi,yi,thetai,vi,wi,po,M);
+function [dist_angle_temp,dist_temp] = onTraj(xi, yi, thetai, vi, wi, po, M)
 
 epsilon = 10^(-6);
 dist_temp = M;
 dist_angle_temp = M;
 
-if wi^2 < epsilon % straight line
-    vec = [po(1)-xi,po(2)-yi];
+if wi^2 < epsilon 
+    % straight line
+    vec = [po(1)-xi, po(2)-yi];
     if vec(1)^2 < epsilon
         if vec(2)^2 < epsilon
             angle = thetai; % same point
@@ -21,6 +22,7 @@ if wi^2 < epsilon % straight line
     if (angle - thetai)^2 < epsilon
         dist_temp = distance_xy([xi,yi],po);
     end
+   
 else % circular trajectory
 
     radius = vi/wi;
