@@ -11,7 +11,7 @@ vi = [v_min:0.1:v_max];
 wi = [w_min:0.1:w_max];
 r = 10;
 
-% Matrix of output values for combinations of design variables D and d: 
+% Matrix of output values for combinations of design variables vi and wi: 
 for j=1:1:length(wi)
   for i=1:1:length(vi)
     % Assignment of design variables:
