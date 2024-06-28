@@ -27,8 +27,7 @@ g(2) = ((wi^2)/(2*(-a_ang_b(1))*dist))^0.5 - 1;
 
 g(3) = 1 - (vi/(va + t_interval * a_lin_b(1)));    % v > va - a*t
 if (va + t_interval * a_lin_b(1)) < 0
-    g(3) = -g(3)
-end
+    v = 
 g(4) = (vi/(va + t_interval * a_lin_b(2))) - 1;    % v < va + at
 
 % similarly, angular velocities

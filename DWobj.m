@@ -14,16 +14,17 @@ wi = x(2);
 DWparams;
 
 % Analysis of current valve spring design.
-[xf,yf,thetaf,dist,dist_angle,goal_angle]=DWanalysis(xi,yi,thetai,vi,wi,thetag,obstacles,delt,M);
-f_goal = goal_angle/pi;
+thetaf = thetai;
+[xf,yf,thetaf,dist,dist_angle,goal_angle]=DWanalysis(xi, yi, thetai, vi, wi, xg, yg, obstacles, delt, M);
+f_goal = goal_angle;
 % f_goal = (((xg-xf)^2+(yg-yf)^2)^0.5)/(xg^2+yg^2)^0.5;
-f_dist = dist/M;
-f_vel = vi/v_max;
+f_dist = dist;
+f_vel = vi;
 
  % Objective function (unscaled)
-f = a*f_goal + b*f_dist + c*f_vel; 
+f = (a+b+c) - (a*f_goal + b*f_dist + c*f_vel); 
 
-f = -f;
+% f = -f;
 
     
 %end 
