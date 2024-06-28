@@ -32,7 +32,7 @@ thetag = atan2(yg,xg);
 obstacles = [[1.2,4.1];[1.1,2.1];[2.9,6.1];[4.2,1.1]];
 
 delt = 0.1;
-t = delt/10;
+t_interval = delt/10;
 M = 10;
 a = 2.0;
 b = 0.2;
