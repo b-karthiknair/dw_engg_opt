@@ -1,4 +1,4 @@
-% Input of design parameters of valve spring.
+% Input of design parameters of dynamic window.
 
 %**************************************************
 % SI-Units: m, N(ewtons), s
