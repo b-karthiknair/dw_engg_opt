@@ -2,9 +2,15 @@
 % Visualization of .m (objective function) and .m (constraints).
 
 % Initialization
-clf, hold off, clear
+clf, clear
 
 DWparams;
+loaded_data= load('approx_func.mat');
+approx_func = loaded_data.approx_func_estimated;
+disp(class(approx_func))
+disp(approx_func([v_min, w_min]) ) % test
+
+% load('approx_func.mat', 'approx_func');
 
 % Combinations of design variables vi and wi 
 vi = [v_min:0.02:v_max];
@@ -27,7 +33,7 @@ for j=1:1:length(wi)
     x(1) = vi(i);
     x(2) = wi(j);
  	 % Objective function
-    f = DWobj(x);
+    f = approx_func(x);
     % Grid value of objective function:
     fobj(j,i) = f; 
      
@@ -80,7 +86,7 @@ beq = [];
 nonlcon = @DWcon;
 % initial design point
 x0 = [0.0 0.0];
-[x, fval, exitflag, output, lambda] = fmincon(@DWobj,x0,A,b,Aeq,beq,lb,ub,nonlcon);
+[x, fval, exitflag, output, lambda] = fmincon(approx_func, x0, A, b, Aeq, beq, lb, ub, nonlcon);
 
 % Plot the markers
 plot(x0(1), x0(2), 'ro', 'MarkerSize', 10, 'LineWidth', 2);

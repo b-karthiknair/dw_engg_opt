@@ -10,6 +10,7 @@ figure;
 hold on;
 fs = [];
 thetas = [];
+
 for i = 1:10
     DWparams;
     % lower and upper bounds for the problem

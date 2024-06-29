@@ -23,7 +23,6 @@ f_vel = vi;
 
  % Objective function (unscaled)
 f = (a+b+c) - (a*f_goal + b*f_dist + c*f_vel); 
-
 % f = -f;
 
     

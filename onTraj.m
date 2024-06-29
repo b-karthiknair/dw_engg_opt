@@ -1,6 +1,8 @@
 function [dist_angle_temp,dist_temp] = onTraj(xi, yi, thetai, vi, wi, po, M)
 
 epsilon = 10^(-6);
+obstacle_radius = 1e-1;
+
 dist_temp = M;
 dist_angle_temp = M;
 
@@ -27,10 +29,9 @@ else % circular trajectory
 
     radius = vi/wi;
     center = [xi-radius*sin(thetai),yi+radius*cos(thetai)];
-   
 
-    if (distance_xy(center,po) - abs(radius))^2 < epsilon % on the trajectory
-        vec1 = [xi-center(1),yi-center(2)];
+    if (distance_xy(center,po) - abs(radius))^2 < obstacle_radius % on the trajectory
+        vec1 = [xi-center(1), yi-center(2)];
         vec1 = vec1/(sum(vec1.^2))^0.5; % normalise
         vec2 = po - center;
         vec2 = vec2/(sum(vec2.^2))^0.5; % normalise
