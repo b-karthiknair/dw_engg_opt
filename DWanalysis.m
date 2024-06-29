@@ -1,5 +1,5 @@
 function [xf, yf, thetaf, dist, dist_angle, goal_angle] = ...
-DWanalysis(xi, yi, thetai, vi, wi, thetag, obstacles, delt, M)
+DWanalysis(xi, yi, thetai, vi, wi, xg, yg, obstacles, delt, M)
 % Analysis of dynamic window.
 %**************************************************
 % SI-Units: m, s, rad
@@ -13,7 +13,7 @@ DWanalysis(xi, yi, thetai, vi, wi, thetag, obstacles, delt, M)
 %   xi : Current x coordinate (m).
 %   yi : Current y coordinate (m).
 %   thetai : Current heading angle (rad).
-%   theta_g : Origin to goal angle (rad).
+%   theta_g : Origin to goal angle (rad).     TODO!!!!!
 %   obstacles : List of (x,y) coordinates for obstacles (m,m).
 %   delt : Time step (s).
 %   M : Large distance to be set if there are no obstacles on the robot
@@ -29,24 +29,18 @@ DWanalysis(xi, yi, thetai, vi, wi, thetag, obstacles, delt, M)
 
 % LOCAL VARIABLES
 %   no : Number of obstacles.
-
-% Normalise thetai (rad).
+  % Normalise thetai (rad).
   thetai = mod(thetai,2*pi);
-
-% Normalise thetag (rad).
-  thetag = mod(thetag,2*pi);
-
-% Number of obstacles.
+  thetaf = thetai;
+  % Number of obstacles.
   [no, ~] = size(obstacles);
 
-% For wi = 0:
+  % For wi = 0:
   if (wi == 0)
       % Predicted x coordinate (m).
       xf = xi + vi*cos(thetai)*delt;
       % Predicted y coordinate (m).
-      yf = yi + vi*sin(thetai)*delt;
-      % Predicted heading angle (rad).
-      thetaf = thetai;      
+      yf = yi + vi*sin(thetai)*delt;      
   else
       % Predicted x coordinate (m).
       xf = xi - (vi/wi)*(sin(thetai) - sin(thetai + wi*delt));
@@ -56,10 +50,10 @@ DWanalysis(xi, yi, thetai, vi, wi, thetag, obstacles, delt, M)
       thetaf = thetai + wi*delt;
   end
 
-% Normalise
+  % Normalise
   thetaf = mod(thetaf, 2*pi); 
 
-% Distance to nearest obstacle on the trajectory (m).
+  % Distance to nearest obstacle on the trajectory (m).
   dist = M;
   dist_angle = M;
 
@@ -71,9 +65,14 @@ DWanalysis(xi, yi, thetai, vi, wi, thetag, obstacles, delt, M)
       end
   end
 
-% Angle between target heading and predicted heading (m)
-  goal_angle = pi - (thetag - thetaf);
-% Normalise
-  goal_angle = mod(goal_angle, 2*pi);
+  % Target heading vector
+  vecg = [xg-xf, yg-yf];
+  vecg = vecg/(sum(vecg.^2))^0.5; % normalise
+  
+  % Actual heading vector
+  veca = [cos(thetaf), sin(thetaf)];
 
+  % Angle between target heading and predicted heading (m)
+  angle_diff = acos(sum(vecg.*veca)); % acos returns in the range [0, pi]
+  goal_angle = pi - angle_diff;
 % end
