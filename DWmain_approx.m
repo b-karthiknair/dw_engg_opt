@@ -51,7 +51,9 @@ end
 
 % Contour plot of scaled dynamic window problem
 % surfl(vi, wi, fobj);
-contour(vi, wi, fobj)
+contour(vi, wi, fobj,30)
+colorbar; 
+
 xlabel('linear velocity vi (m/s)'), ylabel('angular velocity wi (rad/s)'), ...
    title('Figure: Dynamic window optimization problem')
 hold on
@@ -88,7 +90,8 @@ nonlcon = @DWcon;
 x0 = [0.0 0.0];
 
 tic;
-[x, fval, exitflag, output, lambda] = fmincon(approx_func, x0, A, b, Aeq, beq, lb, ub, nonlcon);
+options = optimoptions('fmincon','Display','iter','Algorithm','sqp');
+[x, fval, exitflag, output, lambda] = fmincon(approx_func,x0,A,b,Aeq,beq,lb,ub,nonlcon,options);
 elapsedTime = toc;
 fprintf("time taken for solving exact function is %f seconds\n",elapsedTime);
 
