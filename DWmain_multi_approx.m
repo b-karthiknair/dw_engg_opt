@@ -86,7 +86,7 @@ if converged == 1
 else
     fprintf("Did not converge to goal after %d steps \n",step_thresh);
 end
-
+fprintf("Average time per step is %f seconds \n",(elapsedTime/steps));
 
 axis equal;
 grid on;

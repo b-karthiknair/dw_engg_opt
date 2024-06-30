@@ -9,11 +9,11 @@
 %   delt : Time step (s).
 %   M : Large distance to be set if there are no obstacles on the robot
 %       trajectory (m).
-xi = -1.494988e+00;
-yi = 3.269560e+00;
-thetai = 1.803912e+00;
-va = 1.463832e-02;
-wa = -2.476531e-01;
+xi = -1.470279e+00;
+yi = 3.783648e+00;
+thetai = 1.213393e+00;
+va = 6.029765e-02;
+wa = 1.073242e-02;
 % xi = 1.0;
 % yi = 2.0;
 % thetai = 0.25*pi;
