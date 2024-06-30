@@ -92,6 +92,7 @@ tic;
 elapsedTime = toc;
 fprintf("time taken for solving exact function is %f seconds\n",elapsedTime);
 
+fprintf("Optimal velocities: v = %f, w = %f", x(1), x(2));
 
 % Plot the markers
 plot(x0(1), x0(2), 'ro', 'MarkerSize', 10, 'LineWidth', 2);
