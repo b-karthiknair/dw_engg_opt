@@ -100,4 +100,4 @@ xlabel('Difference step hx'), ylabel('df/dx2'), title('Objective')
 % xlabel('Difference step hx'), ylabel('dg6/dx2'), title('Dynamic window angular velocity (ub)') 
 
 
- 
+
