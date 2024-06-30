@@ -2,16 +2,17 @@
 % Visualization of .m (objective function) and .m (constraints).
 
 DWparams;
+dist_epsilon = 0.1; % Distance tolerance to goal
 
 vi = 0.0;
 wi = 0.0;
 
 figure;
 hold on;
-fs = [];
-thetas = [];
+steps = 0;
 
-for i = 1:10
+while distance_xy([xi,yi],[xg,yg]) > dist_epsilon
+    steps = steps + 1;
     DWparams;
     % lower and upper bounds for the problem
     lb = [v_min, w_min]; 
@@ -26,13 +27,9 @@ for i = 1:10
     nonlcon = @DWcon;
     % initial design point
     x0 = [vi wi];
-    % options = optimoptions("fmincon",...
-    % "Algorithm","interior-point",...
-    % "EnableFeasibilityMode",true,...
-    % "SubproblemAlgorithm","cg");
+    
     [x, fval, exitflag, output, lambda] = fmincon(@DWobj,x0,A,b,Aeq,beq,lb,ub,nonlcon);%,options);
-    fs = cat(1,fs,fval);
-    thetas = cat(1,thetas,thetaf);
+    
     
     
     % arc plotting
@@ -41,7 +38,7 @@ for i = 1:10
     radius = vi/wi;
     
     [xf,yf,thetaf,dist,dist_angle,goal_angle] = ...
-    DWanalysis(xi,yi,thetai,vi,wi,thetag,obstacles,delt,M);
+    DWanalysis(xi,yi,thetai,vi,wi,xg,yg,obstacles,delt,M);
     ed = edit_file('DWparams.m',xf,yf,thetaf,vi,wi);
     center = [xi-radius*sin(thetai),yi+radius*cos(thetai)];
     x0 = center(1);
@@ -49,9 +46,7 @@ for i = 1:10
     r = abs(radius);
     theta_start = atan2(yi-y0,xi-x0);
     theta_end = theta_start + wi*delt; % atan2(yf-y0,xf-x0)
-    % if theta_start > theta_end
-    %     theta_end = theta_end + 2*pi;
-    % end
+    
     theta = linspace(theta_start,theta_end,100);
     x = r*cos(theta) + x0;
     y = r*sin(theta) + y0;
@@ -59,7 +54,7 @@ for i = 1:10
     % arc
     plot(x, y, 'LineWidth', 2);
     hold on;
-    plot(x0, y0, 'ro'); % center
+    % plot(x0, y0, 'ro'); % center
     
 
 end
@@ -70,6 +65,7 @@ for j = 1:length(obstacles)
 end
 
 plot(xg,yg,'go'); % goal
+fprintf("%d steps taken \n",steps);
 
 
 axis equal;
