@@ -49,23 +49,23 @@ contour(vi, wi, fobj)
 xlabel('linear velocity vi (m/s)'), ylabel('angular velocity wi (rad/s)'), ...
    title('Figure: Dynamic window optimization problem')
 hold on
-contour(vi, wi, g1, [0.0 0.0])
-contour(vi, wi, g1, [0.01 0.01],'--') % Infeasible region
-
-contour(vi, wi, g2, [0.0 0.0])
-contour(vi, wi, g2, [0.01 0.01],'--')   % Infeasible region
-
-contour(vi, wi, g3, [0.0 0.0])
-contour(vi, wi, g3, [0.01 0.01],'--')   % Infeasible region
-
-contour(vi, wi, g4, [0.0 0.0])
-contour(vi, wi, g4, [0.01 0.01],'--')   % Infeasible region
-
-contour(vi, wi, g5, [0.0 0.0])
-contour(vi, wi, g5, [0.01 0.01],'--')   % Infeasible region
-
-contour(vi, wi, g6, [0.0 0.0])
-contour(vi, wi, g6, [0.01 0.01],'--')   % Infeasible region
+% contour(vi, wi, g1, [0.0 0.0])
+% contour(vi, wi, g1, [0.01 0.01],'--') % Infeasible region
+% 
+% contour(vi, wi, g2, [0.0 0.0])
+% contour(vi, wi, g2, [0.01 0.01],'--')   % Infeasible region
+% 
+% contour(vi, wi, g3, [0.0 0.0])
+% contour(vi, wi, g3, [0.01 0.01],'--')   % Infeasible region
+% 
+% contour(vi, wi, g4, [0.0 0.0])
+% contour(vi, wi, g4, [0.01 0.01],'--')   % Infeasible region
+% 
+% contour(vi, wi, g5, [0.0 0.0])
+% contour(vi, wi, g5, [0.01 0.01],'--')   % Infeasible region
+% 
+% contour(vi, wi, g6, [0.0 0.0])
+% contour(vi, wi, g6, [0.01 0.01],'--')   % Infeasible region
 
 % lower and upper bounds for the problem
 lb = [v_min, w_min]; 
@@ -85,10 +85,10 @@ tic;
 [x, fval, exitflag, output, lambda] = fmincon(@DWobj,x0,A,b,Aeq,beq,lb,ub,nonlcon);
 elapsedTime = toc;
 fprintf("time taken for solving exact function is %f seconds\n",elapsedTime);
-
+fprintf("Optimal velocities: v = %f, w = %f", x(1), x(2));
 % Plot the markers
-plot(x0(1), x0(2), 'ro', 'MarkerSize', 10, 'LineWidth', 2);
-plot(x(1), x(2), 'go', 'MarkerSize', 10, 'LineWidth', 2);
+% plot(x0(1), x0(2), 'ro', 'MarkerSize', 10, 'LineWidth', 2);
+% plot(x(1), x(2), 'go', 'MarkerSize', 10, 'LineWidth', 2);
 
 
 grid
