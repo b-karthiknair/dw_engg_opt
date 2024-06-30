@@ -9,11 +9,11 @@
 %   delt : Time step (s).
 %   M : Large distance to be set if there are no obstacles on the robot
 %       trajectory (m).
-xi = 0;
-yi = 0;
-thetai = 0;
-va = 0;
-wa = 0;
+xi = 4.987301e+00;
+yi = 3.997096e+00;
+thetai = 2.248382e-01;
+va = 2.070388e-01;
+wa = -1.761091e-01;
 % xi = 1.0;
 % yi = 2.0;
 % thetai = 0.25*pi;
@@ -22,7 +22,7 @@ wa = 0;
 xg = 5;
 yg = 4;
 % thetag = atan2(yg,xg);
-obstacles = [[1.2,4.1];[1.1,2.1];[2.9,6.1];[4.2,1.1]];
+obstacles = [[0.8,2];[1.2,2.2];[1.2,4.1];[0.9,2.2];[1.1,2.1];[2.9,6.1];[4.2,1.1]];
 delt = 0.25;
 t_interval = delt;
 M = 10;
@@ -36,4 +36,9 @@ w_max = pi/3;
 a_lin_b = [-2.0, 0.5];
 a_ang_b = [-pi/3, pi/3];
 %end
+
+
+
+
+
 

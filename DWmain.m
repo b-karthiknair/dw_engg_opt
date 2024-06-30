@@ -3,7 +3,7 @@
 
 % Initialization
 clf, hold off, clear
-
+edit_file('DWparams.m',0, 0, 0, 0, 0);
 DWparams;
 
 % Combinations of design variables vi and wi 
@@ -44,8 +44,14 @@ for j=1:1:length(wi)
 end
 
 % Contour plot of scaled dynamic window problem
-surfl(vi, wi, fobj);
-%contour(vi, wi, fobj)
+% surfl(vi, wi, fobj);
+contour(vi, wi, fobj,30)
+% contourf(vi, wi, fobj); 
+% colormap(jet); 
+% colorbar; 
+
+xlabel('Linear velocity vi (m/s)');
+ylabel('Angular velocity wi (rad/s)');
 xlabel('linear velocity vi (m/s)'), ylabel('angular velocity wi (rad/s)'), ...
    title('Figure: Dynamic window optimization problem')
 hold on
@@ -80,8 +86,13 @@ beq = [];
 nonlcon = @DWcon;
 % initial design point
 x0 = [0.0 0.0];
-[x, fval, exitflag, output, lambda] = fmincon(@DWobj,x0,A,b,Aeq,beq,lb,ub,nonlcon);
 
+tic;
+options = optimoptions('fmincon','Display','iter','Algorithm','sqp');
+[x, fval, exitflag, output, lambda] = fmincon(@DWobj,x0,A,b,Aeq,beq,lb,ub,nonlcon,options);
+elapsedTime = toc;
+fprintf("time taken for solving exact function is %f seconds\n",elapsedTime);
+fprintf("Optimal velocities: v = %f, w = %f", x(1), x(2));
 % Plot the markers
 plot(x0(1), x0(2), 'ro', 'MarkerSize', 10, 'LineWidth', 2);
 plot(x(1), x(2), 'go', 'MarkerSize', 10, 'LineWidth', 2);
