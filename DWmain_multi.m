@@ -28,7 +28,7 @@ while distance_xy([xi,yi],[xg,yg]) > dist_epsilon
     % initial design point
     x0 = [vi wi];
     
-    [x, fval, exitflag, output, lambda] = fmincon(@DWobj,x0,A,b,Aeq,beq,lb,ub,nonlcon);%,options);
+    [x, fval, exitflag, output, lambda] = fmincon(@DWobj,x0,A,b,Aeq,beq,lb,ub,nonlcon);
     
     
     
