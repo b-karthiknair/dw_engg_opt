@@ -1,15 +1,13 @@
 
 % Computation of gradients of objective function and constraints.
 
-
 % Initialization
 clf, hold off, clear
 
-% Note: Constant parameter values are read within the functions DWobj and
-% DWcon
+% Note: Constant parameter values are read within the functions DWobj and DWcon
 
 % Design point for which gradients are computed 
-x = [0.0 0.0];  
+x = [0.1250 0.2618];  
 hxi = 1e-8;
 
 % Forward finite diffence gradients of objective function and constraints
@@ -28,12 +26,6 @@ gx2plush = DWcon([x(1), x(2)+hxi]);
 dgdx1 = (gx1plush - gx)./hxi;
 dgdx2 = (gx2plush - gx)./hxi;
 
-
-fx
-
-[dfdx1;dfdx2]
-%gx
-%dgdx1 
-%dgdx2 
-%del_g = [dgdx1(4) dgdx1(1); dgdx2(4) dgdx2(1)]
-%mu = -inv(del_g)*[dfdx1;dfdx2]
+% Lagrange multipliers for active constraints
+del_g = [dgdx1(4) dgdx1(6); dgdx2(4) dgdx2(6)];
+mu = -inv(del_g)*[dfdx1;dfdx2];
