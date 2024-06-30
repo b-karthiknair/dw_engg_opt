@@ -78,11 +78,11 @@ plot(xg,yg,'go'); % goal
 fprintf("%f seconds taken \n",elapsedTime);
 if converged == 1
     fprintf("%d steps required \n",steps);
+    fprintf("Average time per step is %f seconds \n",(elapsedTime/steps));
 else
     fprintf("Did not converge to goal after %d steps \n",step_thresh);
+    fprintf("Average time per step is %f seconds \n",(elapsedTime/(steps-1));
 end
-fprintf("Average time per step is %f seconds \n",(elapsedTime/steps));
-
 
 axis equal;
 grid on;
