@@ -9,8 +9,8 @@
 %   delt : Time step (s).
 %   M : Large distance to be set if there are no obstacles on the robot
 %       trajectory (m).
-xi = 0;
-yi = 0;
+xi = 1;
+yi = 2;
 thetai = 0;
 va = 0;
 wa = 0;

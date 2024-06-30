@@ -80,7 +80,11 @@ beq = [];
 nonlcon = @DWcon;
 % initial design point
 x0 = [0.0 0.0];
+
+tic;
 [x, fval, exitflag, output, lambda] = fmincon(@DWobj,x0,A,b,Aeq,beq,lb,ub,nonlcon);
+elapsedTime = toc;
+fprintf("time taken for solving exact function is %f seconds\n",elapsedTime);
 
 % Plot the markers
 plot(x0(1), x0(2), 'ro', 'MarkerSize', 10, 'LineWidth', 2);
