@@ -50,8 +50,8 @@ for j=1:1:length(wi)
 end
 
 % Contour plot of scaled dynamic window problem
-surfl(vi, wi, fobj);
-%contour(vi, wi, fobj)
+% surfl(vi, wi, fobj);
+contour(vi, wi, fobj)
 xlabel('linear velocity vi (m/s)'), ylabel('angular velocity wi (rad/s)'), ...
    title('Figure: Dynamic window optimization problem')
 hold on
