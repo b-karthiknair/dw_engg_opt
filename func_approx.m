@@ -1,5 +1,6 @@
 % initialization
 % clf, clear; % removes variables when called for multiple steps
+edit_file('DWparams.m',0, 0, 0, 0, 0);
 DWparams;
 num_samples = 50;
 var_range = [v_min, v_max; w_min, w_max];

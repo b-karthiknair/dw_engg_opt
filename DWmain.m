@@ -3,7 +3,7 @@
 
 % Initialization
 clf, hold off, clear
-
+edit_file('DWparams.m',0, 0, 0, 0, 0);
 DWparams;
 
 % Combinations of design variables vi and wi 

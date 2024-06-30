@@ -1,6 +1,6 @@
 % Two variable dynamic window problem 
 % Visualization of .m (objective function) and .m (constraints).
-
+edit_file('DWparams.m',0, 0, 0, 0, 0);
 DWparams;
 dist_epsilon = 0.1; % Distance tolerance to goal
 epsilon = 10^-6; % Radius of straight line

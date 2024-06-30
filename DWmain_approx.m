@@ -3,7 +3,7 @@
 
 % Initialization
 clf, clear
-
+edit_file('DWparams.m',0, 0, 0, 0, 0);
 DWparams;
 loaded_data= load('approx_func.mat');
 approx_func = loaded_data.approx_func_estimated;
