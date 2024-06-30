@@ -34,6 +34,8 @@ for i=1:1:length(hx)
 
 end
 
+% Uncomment one by one to plot results: ctrl + T
+% Comment out using: ctrl + R
 
 % Plotting finite difference gradients
 % Objective
@@ -63,7 +65,7 @@ xlabel('Difference step hx'), ylabel('df/dx2'), title('Objective')
 % semilogx(hx,dgdx2(:,2)')
 % xlabel('Difference step hx'), ylabel('dg2/dx2'), title('Admissible angular velocity') 
 
-% Dynamic window linear
+% % Dynamic window linear
 % subplot(221)
 % semilogx(hx,dgdx1(:,3))
 % xlabel('Difference step hx'), ylabel('dg3/dx1'), title('Dynamic window linear velocity (lower)')
@@ -82,7 +84,7 @@ xlabel('Difference step hx'), ylabel('df/dx2'), title('Objective')
 
 
 
-% Dynamic window angular
+% % Dynamic window angular
 % subplot(221)
 % semilogx(hx,dgdx1(:,5))
 % xlabel('Difference step hx'), ylabel('dg5/dx1'), title('Dynamic window angular velocity (lb)')
