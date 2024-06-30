@@ -3,7 +3,7 @@
 DWparams;
 num_samples = 50;
 var_range = [v_min, v_max; w_min, w_max];
-display = 1; % toggle to 0 to disable plotting
+display = 0; % toggle to 0 to disable plotting
 
 % latin hypercube sampling for 2 variables
 lhs_samples = lhsdesign(num_samples, 2);  % unscaled
