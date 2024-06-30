@@ -1,8 +1,9 @@
 % initialization
-clf, clear;
+% clf, clear; % removes variables when called for multiple steps
 DWparams;
 num_samples = 50;
 var_range = [v_min, v_max; w_min, w_max];
+display = 0; % toggle to 0 to disable plotting
 
 % latin hypercube sampling for 2 variables
 lhs_samples = lhsdesign(num_samples, 2);  % unscaled
@@ -43,19 +44,24 @@ for i = 1:numel(vi)
     approx_values(i) = approx_func(est_params, [vi(i), wi(i)]);
 end
 
-figure;
-subplot(1, 2, 1);
-surf(vi, wi, true_values);
-title('True Function');
-xlabel('vi');
-ylabel('wi');
-zlabel('f(vi, wi)');
 
-subplot(1, 2, 2);
-surf(vi, wi, approx_values);
-title('Estimated Function');
-xlabel('vi');
-ylabel('wi');
-zlabel('f(vi, wi)');
+if display
 
-sgtitle('True Function vs Estimated Function');
+    figure;
+    subplot(1, 2, 1);
+    surf(vi, wi, true_values);
+    title('True Function');
+    xlabel('vi');
+    ylabel('wi');
+    zlabel('f(vi, wi)');
+    
+    subplot(1, 2, 2);
+    surf(vi, wi, approx_values);
+    title('Estimated Function');
+    xlabel('vi');
+    ylabel('wi');
+    zlabel('f(vi, wi)');
+    
+    sgtitle('True Function vs Estimated Function');
+
+end 

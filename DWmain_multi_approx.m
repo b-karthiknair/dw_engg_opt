@@ -3,16 +3,25 @@
 
 DWparams;
 dist_epsilon = 0.1; % Distance tolerance to goal
+epsilon = 10^-6; % Radius of straight line
+step_thresh = 100; % Maximum number of steps 
 
 vi = 0.0;
 wi = 0.0;
 
+
 figure;
 hold on;
 steps = 0;
+converged = 1;
 
+tic;
 while distance_xy([xi,yi],[xg,yg]) > dist_epsilon
     steps = steps + 1;
+    if steps > step_thresh
+        converged = 0;
+        break;
+    end
     DWparams;
     func_approx;
     loaded_data= load('approx_func.mat');
@@ -29,17 +38,16 @@ while distance_xy([xi,yi],[xg,yg]) > dist_epsilon
     % non-linear constraints
     nonlcon = @DWcon;
     % initial design point
-    x0 = [vi wi];
+    % x0 = [vi wi]; % uses vi wi from func_approx script
     
-    
-    [x, fval, exitflag, output, lambda] = fmincon(approx_func, x0, A, b, Aeq, beq, lb, ub, nonlcon);
+    [x, fval, exitflag, output, lambda] = fmincon(approx_func,[0.0,0.0], A, b, Aeq, beq, lb, ub, nonlcon);
     
     
     
     % arc plotting
     vi = x(1);
     wi = x(2);
-    radius = vi/wi;
+    radius = vi/(wi+epsilon);
     
     [xf,yf,thetaf,dist,dist_angle,goal_angle] = ...
     DWanalysis(xi,yi,thetai,vi,wi,xg,yg,obstacles,delt,M);
@@ -62,6 +70,8 @@ while distance_xy([xi,yi],[xg,yg]) > dist_epsilon
     
 
 end
+elapsedTime = toc;
+
 
 % obstacles
 for j = 1:length(obstacles)
@@ -69,7 +79,13 @@ for j = 1:length(obstacles)
 end
 
 plot(xg,yg,'go'); % goal
-fprintf("%d steps taken \n",steps);
+
+fprintf("%f seconds taken \n",elapsedTime);
+if converged == 1
+    fprintf("%d steps required \n",steps);
+else
+    fprintf("Did not converge to goal after %d steps \n",step_thresh);
+end
 
 
 axis equal;
